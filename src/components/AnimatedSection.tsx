@@ -10,19 +10,18 @@ interface AnimatedSectionProps {
 }
 
 export function AnimatedSection({ children, delay = 0 }: AnimatedSectionProps) {
-  const { elementRef, isVisible } = useIntersectionObserver({
+  const { ref, isIntersecting } = useIntersectionObserver({
     threshold: 0.1,
     triggerOnce: true,
   });
 
   return (
     <Box
-      ref={elementRef}
-      className={`${classes.section} ${isVisible ? classes.visible : ""}`}
+      ref={ref}
+      className={`${classes.section} ${isIntersecting ? classes.visible : ""}`}
       style={{ animationDelay: `${delay}ms` }}
     >
       {children}
     </Box>
   );
 }
-
